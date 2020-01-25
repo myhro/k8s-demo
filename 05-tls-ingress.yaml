@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: guestbook
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+    - host: guestbook.myhro.info
+      http:
+        paths:
+          - backend:
+              serviceName: guestbook
+              servicePort: 3000
+  tls:
+    - hosts:
+        - guestbook.myhro.info
+      secretName: guestbook-tls
